@@ -1116,60 +1116,8 @@
     });
   });
 
-  // Registration form — submits to Formspree
-  async function https://docs.google.com/forms/d/e/1FAIpQLSegvjsy7_gFiVfufRzu90arrrOKi09M-qiZuVlhDRuN5NTgcw/viewform?usp=header() {
-    const name = document.getElementById('fname').value.trim();
-    const age = document.getElementById('fage').value.trim();
-    const email = document.getElementById('femail').value.trim();
-    const year = document.getElementById('fyear').value;
-    const moduleChoice = document.querySelector('[name="module"]:checked').value;
-
-    if (!name) { showToast('Please enter your full name.'); return; }
-    if (!age || isNaN(age) || age < 16 || age > 60) { showToast('Please enter a valid age.'); return; }
-    if (!email || !email.includes('@')) { showToast('Please enter a valid email address.'); return; }
-    if (!year) { showToast('Please select your year of programme.'); return; }
-
-    const btn = document.querySelector('.form-submit');
-    btn.textContent = 'Submitting…';
-    btn.disabled = true;
-
-    const yearLabels = { year1: 'Year 1', year2: 'Year 2', year3: 'Year 3', pg: 'Postgraduate / Masters' };
-    const moduleLabel = moduleChoice === 'week1' ? 'Week 1 Only (Free)' : 'Full Module — Week 1 + Week 2 (₹299/month)';
-
-    try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          Name: name,
-          Age: age,
-          Email: email,
-          'Year of Programme': yearLabels[year],
-          'Module Selected': moduleLabel,
-          'Registered At': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
-        })
-      });
-
-      if (res.ok) {
-        document.getElementById('formInner').style.display = 'none';
-        document.getElementById('successBox').style.display = 'block';
-      } else {
-        showToast('Something went wrong. Please try again.');
-        btn.textContent = 'https://docs.google.com/forms/d/e/1FAIpQLSegvjsy7_gFiVfufRzu90arrrOKi09M-qiZuVlhDRuN5NTgcw/viewform?usp=header';
-        btn.disabled = false;
-      }
-    } catch (err) {
-      showToast('Network error. Please check your connection.');
-      btn.textContent = 'https://docs.google.com/forms/d/e/1FAIpQLSegvjsy7_gFiVfufRzu90arrrOKi09M-qiZuVlhDRuN5NTgcw/viewform?usp=header';
-      btn.disabled = false;
-    }
-  }
-
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+function submitForm() {
+    window.open('https://docs.google.com/forms/d/e/1FAIpQLSegvjsy7_gFiVfufRzu90arrrOKi09M-qiZuVlhDRuN5NTgcw/viewform?usp=header', '_blank');
   }
 
   // Smooth scroll offset for fixed nav
